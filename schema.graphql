@@ -1,0 +1,50 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Scoreboard {
+    id: ID!
+    names: [String]
+    victory: [String]
+}
+
+type ScoreboardResult {
+    success: Boolean!
+    errors: [String]
+    scoreboard: Scoreboard
+}
+
+type Game {
+    id: ID!
+    finished: Boolean
+    comments: [String]
+}
+
+type GameResult {
+    success: Boolean!
+    errors: [String]
+    scoreboard: Scoreboard
+}
+
+type GamesResult {
+    success: Boolean!
+    errors: [String]
+    games: [Game]
+}
+
+type BooleanResult {
+    success: Boolean!
+    errors: [String]
+}
+type Query {
+    getGameScoreboard(id: ID!): GameResult
+    listOngoingGames: GamesResult
+    listFinishedGames: GamesResult
+}
+
+type Mutation {
+    createOngoingGame: BooleanResult
+    finishGame(id: ID!, names: [String], result: [String]): GameResult
+    addComment(id: ID!, comment: String!): BooleanResult  
+}
